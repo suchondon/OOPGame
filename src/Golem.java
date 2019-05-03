@@ -1,9 +1,11 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Golem extends JPanel{
 	Image bg = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") 
@@ -68,9 +70,9 @@ public class Golem extends JPanel{
 	Image Orc_DieR = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") 
 			+ File.separator +"image"+ File.separator + "Golem" + File.separator + "Orc_Dying.gif");
 	Image Orc_KickL = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") 
-			+ File.separator +"image"+ File.separator + "Golem" + File.separator + "Orc_Kicking2.gif");
+			+ File.separator +"image"+ File.separator + "Golem" + File.separator + "Orc_KickingL.png");
 	Image Orc_KickR = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") 
-			+ File.separator +"image"+ File.separator + "Golem" + File.separator + "Orc_Kicking.gif");
+			+ File.separator +"image"+ File.separator + "Golem" + File.separator + "Orc_KickingR.png");
 	Image Orc_RunL = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") 
 			+ File.separator +"image"+ File.separator + "Golem" + File.separator + "Orc_Running2.gif");
 	Image Orc_RunR = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") 
@@ -113,7 +115,9 @@ public class Golem extends JPanel{
 	
 	int xIce,xLava,xOrc,xAngel;
 	int yIce,yLava,yOrc,yAngle;
-	boolean IceKick,AngelKick,OrcKick,LavaKick;
+	boolean IceKick,AngelKick,OrcKick,LavaKick,
+			IceL,AngelL,OrcL,LavaL,
+			IceR,AngelR,OrcR,LavaR;
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -121,13 +125,23 @@ public class Golem extends JPanel{
 		super.paintComponent(g);
 		g.drawImage(bg, 0, 0, this);
 		g.drawImage(Ice_IdleR, xIce, yIce,120,120, this);
-		if (IceKick) {
-			g.drawImage(Ice_KickR, xIce, yIce,120,120, this);
-			IceKick=false;
-		}
 		g.drawImage(Angel_IdleL, xAngel, yAngle,120,120, this);
 		g.drawImage(Orc_IdleL, xOrc, yOrc,120,120, this);
 		g.drawImage(Lava_IdleR, xLava, yLava,120,120, this);
+		if (IceKick) {
+			g.drawImage(Ice_KickR, xIce, yIce,120,120, this);
+			IceKick=false;
+		}if(AngelKick){
+			g.drawImage(Angel_KickR, xAngel, yAngle,120,120, this);
+			AngelKick=false;
+		}if(OrcKick){
+			g.drawImage(Orc_KickR, xOrc, yOrc,120,120, this);
+			OrcKick=false;
+		}if(LavaKick){
+			g.drawImage(Lava_KickR, xLava, yLava,120,120, this);
+			LavaKick=false;
+		}
+		
 		
 		repaint();
 	}

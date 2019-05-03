@@ -19,18 +19,20 @@ import javax.swing.JPanel;
 
 
 public class game extends JFrame implements KeyListener{
-	network network = new network();
+	network network;
 	Golem golem = new Golem();
 	server s1 = new server(golem);
 	int xIce=0,xLava=0,xOrc=1180,xAngel=1180;
 	int yIce=300,yLava=500,yOrc=300,yAngle=500;
 	String myGolem;
-	public game() {
+	public game(network network) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Fighter spirit");
 		setSize(1320,729);
 		setLocationRelativeTo(null);
-		network.setVisible(true);
+		
+		this.network = network;
+		
 		addKeyListener(this);
 		s1.start();
 		
@@ -58,6 +60,7 @@ public class game extends JFrame implements KeyListener{
 				if (xIce<=1180) {
 					xIce+=10;
 				}
+				network.setKick(false);
 				golem.setxIce(xIce);
 				golem.setyIce(yIce);
 				network.setX(xIce);
@@ -68,6 +71,7 @@ public class game extends JFrame implements KeyListener{
 				if (xLava<=1180) {
 					xLava+=10;
 				}
+				network.setKick(false);
 				golem.setxLava(xLava);
 				golem.setyLava(yLava);
 				network.setY(yLava);
@@ -79,6 +83,7 @@ public class game extends JFrame implements KeyListener{
 				if (xOrc<=1180) {
 					xOrc+=10;
 				}
+				network.setKick(false);
 				golem.setxOrc(xOrc);
 				golem.setyOrc(yOrc);
 				network.setX(xOrc);
@@ -90,6 +95,7 @@ public class game extends JFrame implements KeyListener{
 				if (xAngel<=1180) {
 					xAngel+=10;
 				}
+				network.setKick(false);
 				golem.setxAngel(xAngel);
 				golem.setyAngle(yAngle);
 				network.setX(xAngel);
@@ -103,6 +109,7 @@ public class game extends JFrame implements KeyListener{
 				if (xIce>=0) {
 					xIce-=10;
 				}
+				network.setKick(false);
 				golem.setxIce(xIce);
 				golem.setyIce(yIce);
 				network.setX(xIce);
@@ -113,6 +120,7 @@ public class game extends JFrame implements KeyListener{
 				if (xLava>=0) {
 					xLava-=10;
 				}
+				network.setKick(false);
 				golem.setxLava(xLava);
 				golem.setyLava(yLava);
 				network.setX(xLava);
@@ -124,6 +132,7 @@ public class game extends JFrame implements KeyListener{
 				if (xOrc>=0) {
 					xOrc-=10;
 				}
+				network.setKick(false);
 				golem.setxOrc(xOrc);
 				golem.setyOrc(yOrc);
 				network.setX(xOrc);
@@ -135,6 +144,7 @@ public class game extends JFrame implements KeyListener{
 				if (xAngel>=0) {
 					xAngel-=10;
 				}
+				network.setKick(false);
 				golem.setxAngel(xAngel);
 				golem.setyAngle(yAngle);
 				network.setX(xAngel);
@@ -148,6 +158,7 @@ public class game extends JFrame implements KeyListener{
 				if (yIce>=300) {
 					yIce-=10;
 				}
+				network.setKick(false);
 				golem.setxIce(xIce);
 				golem.setyIce(yIce);
 				network.setX(xIce);
@@ -158,6 +169,7 @@ public class game extends JFrame implements KeyListener{
 				if (yLava>=300) {
 					yLava-=10;
 				}
+				network.setKick(false);
 				golem.setxLava(xLava);
 				golem.setyLava(yLava);
 				network.setY(yLava);
@@ -169,6 +181,7 @@ public class game extends JFrame implements KeyListener{
 				if (yOrc>=300) {
 					yOrc-=10;
 				}
+				network.setKick(false);
 				golem.setxOrc(xOrc);
 				golem.setyOrc(yOrc);
 				network.setX(xOrc);
@@ -180,6 +193,7 @@ public class game extends JFrame implements KeyListener{
 				if (yAngle>=300) {
 					yAngle-=10;
 				}
+				network.setKick(false);
 				golem.setxAngel(xAngel);
 				golem.setyAngle(yAngle);
 				network.setX(xAngel);
@@ -193,6 +207,7 @@ public class game extends JFrame implements KeyListener{
 				if (yIce<=550) {
 					yIce+=10;
 				}
+				network.setKick(false);
 				golem.setxIce(xIce);
 				golem.setyIce(yIce);
 				network.setX(xIce);
@@ -203,6 +218,7 @@ public class game extends JFrame implements KeyListener{
 				if (yLava<=550) {
 					yLava+=10;
 				}
+				network.setKick(false);
 				golem.setxLava(xLava);
 				golem.setyLava(yLava);
 				network.setY(yLava);
@@ -214,6 +230,7 @@ public class game extends JFrame implements KeyListener{
 				if (yOrc<=550) {
 					yOrc+=10;
 				}
+				network.setKick(false);
 				golem.setxOrc(xOrc);
 				golem.setyOrc(yOrc);
 				network.setX(xOrc);
@@ -225,6 +242,7 @@ public class game extends JFrame implements KeyListener{
 				if (yAngle<=550) {
 					yAngle+=10;
 				}
+				network.setKick(false);
 				golem.setxAngel(xAngel);
 				golem.setyAngle(yAngle);
 				network.setX(xAngel);
@@ -249,16 +267,28 @@ public class game extends JFrame implements KeyListener{
 			}else if (myGolem.equals("lava")) {
 				network.setKick(true);
 				network.setMe("lava");
+				golem.setxLava(xLava);
+				golem.setyLava(yLava);
+				network.setX(xLava);
+				network.setY(yLava);
 				network.send();
 			}
 			else if (myGolem.equals("orc")) {
 				network.setKick(true);
 				network.setMe("orc");
+				golem.setxOrc(xOrc);
+				golem.setyOrc(yOrc);
+				network.setX(xOrc);
+				network.setY(yOrc);
 				network.send();
 			}
 			else if (myGolem.equals("angel")) {
 				network.setKick(true);
 				network.setMe("angel");
+				golem.setxAngel(xAngel);
+				golem.setyAngle(yAngle);
+				network.setX(xAngel);
+				network.setY(yAngle);
 				network.send();
 			}
 	}

@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class network extends JFrame{
+	game playgame = new game(this);
 	JPanel panel1 = new JPanel(new GridLayout(3, 1));
 	JTextArea ip = new JTextArea();
 	JButton conn = new JButton("Connect");
@@ -37,6 +38,8 @@ public class network extends JFrame{
 		panel1.setBounds(10, 50, 300, 300);
 		panel1.add(ip);
 		panel1.add(conn);
+		
+		playgame.setVisible(true);
 		
 		add(panel1);
 		
@@ -86,6 +89,7 @@ public class network extends JFrame{
 				serializedObject = bo.toByteArray();
 				
 				Socket socket = new Socket(ip.getText(), 50101);
+				
 				PrintStream dataOut = new PrintStream(socket.getOutputStream());
 				dataOut.write(serializedObject);
 				dataOut.close();
@@ -100,7 +104,6 @@ public class network extends JFrame{
 }
 
 class server extends Thread{
-	//game game;
 	Golem golem;
 	ServerSocket servSocket;
 	
@@ -115,7 +118,8 @@ class server extends Thread{
 			while (true) {
 				try {
 					
-					Socket socket =servSocket.accept();
+					Socket socket = servSocket.accept();
+					
 					socket.setTcpNoDelay(true);
 					InputStream input = socket.getInputStream();
 					
@@ -124,8 +128,7 @@ class server extends Thread{
 					ByteArrayInputStream bi = new ByteArrayInputStream(data);
 					ObjectInputStream si = new ObjectInputStream(bi);
 					MessageChat chat = (MessageChat)si.readObject();
-					SimpleDateFormat df = new SimpleDateFormat("HH:mm");
-					//show1.show.insert(chat.getName() + " said \""+ chat.getMessage() + "\" at " + df.format(chat.getDate())+"\n", 0);
+			
 					if (chat.getMe().equals("orc")) {
 						golem.setOrcKick(chat.isKick());
 						golem.setxOrc(chat.getX());

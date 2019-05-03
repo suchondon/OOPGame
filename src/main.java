@@ -1,7 +1,7 @@
 
 public class main {
 	public static void main(String[] args) {
-		game frame = new game();
+		network frame = new network();
 		frame.setVisible(true);
 	}
 }
