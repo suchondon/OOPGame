@@ -53,7 +53,6 @@ public class game extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		try {Thread.sleep(500);} catch (InterruptedException e1) {}
 		if (e.getKeyCode()==39) {
 			if (myGolem.equals("ice")) {
 				if (xIce<=1180) {

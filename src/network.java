@@ -116,6 +116,7 @@ class server extends Thread{
 				try {
 					
 					Socket socket =servSocket.accept();
+					socket.setTcpNoDelay(true);
 					InputStream input = socket.getInputStream();
 					
 					byte[] data = new byte[2048];
