@@ -115,7 +115,7 @@ public class network extends JFrame{
 				so.flush();
 				serializedObject = bo.toByteArray();
 				
-				Socket socket = new Socket(serverIP, 4063);
+				Socket socket = new Socket(serverIP, 4062);
 				
 				PrintStream dataOut = new PrintStream(socket.getOutputStream());
 				dataOut.write(serializedObject);
@@ -140,7 +140,7 @@ class server extends Thread{
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			servSocket = new ServerSocket(4063);
+			servSocket = new ServerSocket(4062);
 			while (true) {
 				try {
 					

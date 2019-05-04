@@ -15,7 +15,7 @@ public class BroadcastServer extends Thread {
 	      socket = new DatagramSocket(4062, InetAddress.getByName("0.0.0.0"));
 	      socket.setBroadcast(true);
 	      
-	      while (count<=2) {
+	      while (count<=1) {
 	        System.out.println(getClass().getName() + ">>>Ready to receive broadcast packets!");
 	        //Receive a packet
 	        byte[] recvBuf = new byte[15000];
