@@ -19,18 +19,27 @@ import javax.swing.JPanel;
 
 
 public class game extends JFrame implements KeyListener{
-	network network = new network();
+	network network;
 	Golem golem = new Golem();
+<<<<<<< HEAD
 	server s1 = new server(golem);
+=======
+	server s1 = new server(golem,network);
+>>>>>>> parent of 81944e7... Add FindIP
 	int xIce=0,xLava=0,xOrc=1180,xAngel=1180;
 	int yIce=300,yLava=500,yOrc=300,yAngle=500;
 	String myGolem;
-	public game() {
+	public game(network network) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Fighter spirit");
 		setSize(1320,729);
 		setLocationRelativeTo(null);
 		
+<<<<<<< HEAD
+=======
+		this.network = network;
+		
+>>>>>>> parent of 81944e7... Add FindIP
 		addKeyListener(this);
 		s1.start();
 		
