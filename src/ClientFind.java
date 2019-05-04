@@ -6,8 +6,10 @@ import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 
-public class ClientFind {{
+class ClientFind {{
 	DatagramSocket c;
+	String ip = "";
+	network n1 = new network();
 	try {
 		  //Open a random port to send the package
 		  c = new DatagramSocket();
@@ -59,7 +61,7 @@ public class ClientFind {{
 		  //We have a response
 		  
 		  System.out.println( ">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
-		  
+		  n1.setServerIP(receivePacket.getAddress().getHostAddress());
 
 		  c.close();
 		} catch (IOException ex) {

@@ -5,3 +5,23 @@ public class main {
 		frame.setVisible(true);
 	}
 }
+
+
+
+class rungame extends Thread{
+	network network;
+	public rungame(network network) {
+		// TODO Auto-generated constructor stub
+		this.network = network;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		super.run();
+		while (network.getServerIP().equals("")) {
+			try {Thread.sleep(1000);} catch (InterruptedException e) {}
+		}
+		network.playgame.setVisible(true);
+		
+	}
+}
