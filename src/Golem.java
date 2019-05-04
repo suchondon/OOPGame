@@ -141,8 +141,6 @@ public class Golem extends JPanel{
 			g.drawImage(Lava_KickR, xLava, yLava,120,120, this);
 			LavaKick=false;
 		}
-		
-		
 		repaint();
 	}
 

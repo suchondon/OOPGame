@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class network extends JFrame{
-	BroadcastServer serverBroad = new BroadcastServer();
+	BroadcastServer serverBroad = new BroadcastServer(this);
 	ClientFind findServer;
 	game playgame = new game(this);
 	rungame rungame = new rungame(this);
@@ -36,7 +36,7 @@ public class network extends JFrame{
 	String me;
 	boolean kick;
 	String serverIP = "";
-	List<String> clientIP = new ArrayList<String>();
+	String[] clientIP = new String[4];
 	
 	public network(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -67,6 +67,8 @@ public class network extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				serverBroad.start();
+				//try {Thread.sleep(1000);} catch (InterruptedException e1) {}
+				
 			}
 		});
 	}
@@ -91,8 +93,12 @@ public class network extends JFrame{
 		this.serverIP = ip;
 	}
 	
-	public void setClientIP(String ip) {
-		this.clientIP.add(ip);
+	public void setClientIP(int index,String ip) {
+		this.clientIP[index] = ip;
+	}
+	
+	public String getClientIP(int index) {
+		return this.clientIP[index];
 	}
 	
 	public String getServerIP() {
@@ -118,7 +124,7 @@ public class network extends JFrame{
 				so.flush();
 				serializedObject = bo.toByteArray();
 				
-				Socket socket = new Socket(serverIP, 4063);
+				Socket socket = new Socket(serverIP, 4062);
 				
 				PrintStream dataOut = new PrintStream(socket.getOutputStream());
 				dataOut.write(serializedObject);
@@ -127,23 +133,52 @@ public class network extends JFrame{
 				// TODO: handle exception
 				System.out.println(e2);
 			}
-	
-		
 	}
+	public void send(String ip) {
+		try {
+			MessageChat chat = new MessageChat();
+			
+			chat.setX(x);
+			chat.setY(y);
+			chat.setMe(me);
+			chat.setKick(kick);
+			
+			
+			byte[] serializedObject = new byte[2048];
+			
+			ByteArrayOutputStream bo =new ByteArrayOutputStream();
+			ObjectOutputStream so = new ObjectOutputStream(bo);
+			so.writeObject(chat);
+			so.flush();
+			serializedObject = bo.toByteArray();
+			
+			Socket socket = new Socket(ip, 4062);
+			
+			PrintStream dataOut = new PrintStream(socket.getOutputStream());
+			dataOut.write(serializedObject);
+			dataOut.close();
+		} catch (Exception e2) {
+			// TODO: handle exception
+			System.out.println(e2);
+		}
+	}
+	
 }
 
 class server extends Thread{
 	Golem golem;
+	network network;
 	ServerSocket servSocket;
 	
-	public server(Golem golem){
+	public server(Golem golem,network network){
 		this.golem = golem;
+		this.network = network;
 	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			servSocket = new ServerSocket(4063);
+			servSocket = new ServerSocket(4062);
 			while (true) {
 				try {
 					
@@ -162,24 +197,31 @@ class server extends Thread{
 						golem.setOrcKick(chat.isKick());
 						golem.setxOrc(chat.getX());
 						golem.setyOrc(chat.getY());
+						System.out.println(chat.getMe());
 					}
 					else if (chat.getMe().equals("ice")) {
 						golem.setIceKick(chat.isKick());
 						golem.setxIce(chat.getX());
 						golem.setyIce(chat.getY());
+						System.out.println(chat.getMe());
 					}
 					else if (chat.getMe().equals("lava")) {
 						golem.setLavaKick(chat.isKick());
 						golem.setxLava(chat.getX());
 						golem.setyLava(chat.getY());
+						System.out.println(chat.getMe());
 					}
 					else if (chat.getMe().equals("angel")) {
 						golem.setAngelKick(chat.isKick());
 						golem.setxAngel(chat.getX());
 						golem.setyAngle(chat.getY());
+						System.out.println(chat.getMe());
 					}
 					
-					System.out.println(chat.getMe());
+//					network.send(network.getClientIP(0));
+//					network.send(network.getClientIP(1));
+//					network.send(network.getClientIP(2));
+					
 					System.out.println(chat.getX());
 					System.out.println(chat.getY());
 					System.out.println(chat.isKick());

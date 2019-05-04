@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class game extends JFrame implements KeyListener{
 	network network;
 	Golem golem = new Golem();
-	server s1 = new server(golem);
+	server s1 = new server(golem,network);
 	int xIce=0,xLava=0,xOrc=1180,xAngel=1180;
 	int yIce=300,yLava=500,yOrc=300,yAngle=500;
 	String myGolem;
