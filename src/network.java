@@ -13,7 +13,10 @@ import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,13 +25,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class network extends JFrame{
+	BroadcastServer serverBroad = new BroadcastServer();
+	ClientFind findServer = new ClientFind();
 	game playgame = new game(this);
 	JPanel panel1 = new JPanel(new GridLayout(3, 1));
-	JTextArea ip = new JTextArea();
-	JButton conn = new JButton("Connect");
+	JButton join = new JButton("Join");
+	JButton server = new JButton("Server");
 	int x,y;
 	String me;
 	boolean kick;
+	String serverIP = "";
+	List<String> clientIP = new ArrayList<String>();
 	
 	public network(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,19 +43,28 @@ public class network extends JFrame{
 		setBounds(10, 10, 300, 300);
 		
 		panel1.setBounds(10, 50, 300, 300);
-		panel1.add(ip);
-		panel1.add(conn);
+		panel1.add(join);
+		panel1.add(server);
 		
 		playgame.setVisible(true);
 		
 		add(panel1);
 		
-		conn.addActionListener(new ActionListener() {
+		join.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				//send();
+				
+			}
+		});
+		
+		server.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				serverBroad.start();
 			}
 		});
 	}
@@ -68,9 +84,17 @@ public class network extends JFrame{
 	public void setKick(boolean kick) {
 		this.kick = kick;
 	}
+	
+	public void setServerIP(String ip) {
+		this.serverIP = ip;
+	}
+	
+	public void setClientIP(String ip) {
+		this.clientIP.add(ip);
+	}
 
 	public void send() {
-		//while (true) {
+		
 			try {
 				MessageChat chat = new MessageChat();
 				
@@ -88,7 +112,7 @@ public class network extends JFrame{
 				so.flush();
 				serializedObject = bo.toByteArray();
 				
-				Socket socket = new Socket(ip.getText(), 50101);
+				Socket socket = new Socket(serverIP, 4063);
 				
 				PrintStream dataOut = new PrintStream(socket.getOutputStream());
 				dataOut.write(serializedObject);
@@ -97,7 +121,6 @@ public class network extends JFrame{
 				// TODO: handle exception
 				System.out.println(e2);
 			}
-	//}
 	
 		
 	}
@@ -114,7 +137,7 @@ class server extends Thread{
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			servSocket = new ServerSocket(50101);
+			servSocket = new ServerSocket(4063);
 			while (true) {
 				try {
 					

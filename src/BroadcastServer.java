@@ -6,15 +6,16 @@ import java.util.logging.Logger;
 
 public class BroadcastServer extends Thread {
 	DatagramSocket socket;
+	int count = 1;
 	
 	  @Override
 	  public void run() {
 	    try {
 	      //Keep a socket open to listen to all the UDP trafic that is destined for this port
-	      socket = new DatagramSocket(8888, InetAddress.getByName("0.0.0.0"));
+	      socket = new DatagramSocket(4062, InetAddress.getByName("0.0.0.0"));
 	      socket.setBroadcast(true);
 	      
-	      while (true) {
+	      while (count<=4) {
 	        System.out.println(getClass().getName() + ">>>Ready to receive broadcast packets!");
 	        //Receive a packet
 	        byte[] recvBuf = new byte[15000];
@@ -27,8 +28,8 @@ public class BroadcastServer extends Thread {
 	        //See if the packet holds the right command (message)
 	
 	        String message = new String(packet.getData()).trim();
-	        if (message.equals("DISCOVER_FUIFSERVER_REQUEST")) {
-	          byte[] sendData = "DISCOVER_FUIFSERVER_RESPONSE".getBytes();
+	        if (message.equals("Fighter_spirit_Player")) {
+	          byte[] sendData = "Fighter_spirit_Player_RESPONSE".getBytes();
 	          //Send a response
 	          DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, packet.getAddress(), packet.getPort());
 	          socket.send(sendPacket);

@@ -6,20 +6,18 @@ import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 
-public class ClientFindServer {
-	public static void main(String[] args) {
-		DatagramSocket c;
-		// Find the server using UDP broadcast
-		try {
+public class ClientFind {{
+	DatagramSocket c;
+	try {
 		  //Open a random port to send the package
 		  c = new DatagramSocket();
 		  c.setBroadcast(true);
 
-		  byte[] sendData = "DISCOVER_FUIFSERVER_REQUEST".getBytes();
+		  byte[] sendData = "Fighter_spirit_Player".getBytes();
 
 		  //Try the 255.255.255.255 first
 		  try {
-		    DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), 8888);
+		    DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), 4062);
 		    c.send(sendPacket);
 		    System.out.println(">>> Request packet sent to: 255.255.255.255 (DEFAULT)");
 		  } catch (Exception e) {
@@ -42,7 +40,7 @@ public class ClientFindServer {
 
 		      // Send the broadcast package!
 		      try {
-		        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 8888);
+		        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 4062);
 		        c.send(sendPacket);
 		      } catch (Exception e) {
 		      }
@@ -59,21 +57,13 @@ public class ClientFindServer {
 		  c.receive(receivePacket);
 
 		  //We have a response
+		  
 		  System.out.println( ">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
+		  
 
-//		  //Check if the message is correct
-//		  String message = new String(receivePacket.getData()).trim();
-//		  if (message.equals("DISCOVER_FUIFSERVER_RESPONSE")) {
-//		    //DO SOMETHING WITH THE SERVER'S IP (for example, store it in your controller)
-//			  System.out.println( ">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
-//
-//		    Controller_Base.setServerIp(receivePacket.getAddress());
-//		  }
-//
-//		  //Close the port!
 		  c.close();
 		} catch (IOException ex) {
 		  //Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	}
+}
 }
