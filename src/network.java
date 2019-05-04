@@ -27,8 +27,6 @@ import javax.swing.JTextArea;
 public class network extends JFrame{
 	BroadcastServer serverBroad = new BroadcastServer(this);
 	ClientFind findServer;
-	game playgame = new game(this);
-	rungame rungame = new rungame(this);
 	JPanel panel1 = new JPanel(new GridLayout(3, 1));
 	JButton join = new JButton("Join");
 	JButton server = new JButton("Server");
@@ -46,9 +44,7 @@ public class network extends JFrame{
 		panel1.setBounds(10, 50, 300, 300);
 		panel1.add(join);
 		panel1.add(server);
-		
-		rungame.start();
-		
+
 		add(panel1);
 		
 		join.addActionListener(new ActionListener() {
@@ -166,12 +162,12 @@ public class network extends JFrame{
 }
 
 class server extends Thread{
-	Golem golem;
+	game game;
 	network network;
 	ServerSocket servSocket;
 	
-	public server(Golem golem,network network){
-		this.golem = golem;
+	public server(game game,network network){
+		this.game = game;
 		this.network = network;
 	}
 	@Override
@@ -194,34 +190,35 @@ class server extends Thread{
 					MessageChat chat = (MessageChat)si.readObject();
 			
 					if (chat.getMe().equals("orc")) {
-						golem.setOrcKick(chat.isKick());
-						golem.setxOrc(chat.getX());
-						golem.setyOrc(chat.getY());
+						game.golem.setOrcKick(chat.isKick());
+						game.golem.setxOrc(chat.getX());
+						game.golem.setyOrc(chat.getY());
 						System.out.println(chat.getMe());
 					}
 					else if (chat.getMe().equals("ice")) {
-						golem.setIceKick(chat.isKick());
-						golem.setxIce(chat.getX());
-						golem.setyIce(chat.getY());
+						game.golem.setIceKick(chat.isKick());
+						game.golem.setxIce(chat.getX());
+						game.golem.setyIce(chat.getY());
 						System.out.println(chat.getMe());
 					}
 					else if (chat.getMe().equals("lava")) {
-						golem.setLavaKick(chat.isKick());
-						golem.setxLava(chat.getX());
-						golem.setyLava(chat.getY());
+						game.golem.setLavaKick(chat.isKick());
+						game.golem.setxLava(chat.getX());
+						game.golem.setyLava(chat.getY());
 						System.out.println(chat.getMe());
 					}
 					else if (chat.getMe().equals("angel")) {
-						golem.setAngelKick(chat.isKick());
-						golem.setxAngel(chat.getX());
-						golem.setyAngle(chat.getY());
+						game.golem.setAngelKick(chat.isKick());
+						game.golem.setxAngel(chat.getX());
+						game.golem.setyAngle(chat.getY());
 						System.out.println(chat.getMe());
 					}
 					
-//					network.send(network.getClientIP(0));
-//					network.send(network.getClientIP(1));
-//					network.send(network.getClientIP(2));
+					network.send(network.getClientIP(0));
+					network.send(network.getClientIP(1));
+					network.send(network.getClientIP(2));
 					
+					System.out.println(network.clientIP[0]);
 					System.out.println(chat.getX());
 					System.out.println(chat.getY());
 					System.out.println(chat.isKick());
