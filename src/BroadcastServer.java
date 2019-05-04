@@ -6,7 +6,12 @@ import java.util.logging.Logger;
 
 public class BroadcastServer extends Thread {
 	DatagramSocket socket;
+	network network;
 	int count = 1;
+	public BroadcastServer(network network) {
+		// TODO Auto-generated constructor stub
+		this.network = network;
+	}
 	
 	  @Override
 	  public void run() {
@@ -35,7 +40,8 @@ public class BroadcastServer extends Thread {
 	          socket.send(sendPacket);
 	          System.out.println(getClass().getName() + ">>>Sent packet to: " + sendPacket.getAddress().getHostAddress());
 	          count+=1;
-	
+	          
+	          network.setServerIP(sendPacket.getAddress().getHostAddress());
 	        }
 	        
 	      }

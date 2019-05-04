@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class network extends JFrame{
-	BroadcastServer serverBroad = new BroadcastServer();
+	BroadcastServer serverBroad = new BroadcastServer(this);
 	ClientFind findServer;
 	JPanel panel1 = new JPanel(new GridLayout(3, 1));
 	JButton join = new JButton("Join");
@@ -130,11 +130,11 @@ public class network extends JFrame{
 }
 
 class server extends Thread{
-	Golem golem;
+	game game;
 	ServerSocket servSocket;
 	
-	public server(Golem golem){
-		this.golem = golem;
+	public server(game game){
+		this.game = game;
 	}
 	@Override
 	public void run() {
@@ -156,33 +156,33 @@ class server extends Thread{
 					MessageChat chat = (MessageChat)si.readObject();
 			
 					if (chat.getMe().equals("orc")) {
-						golem.setOrcKick(chat.isKick());
-						golem.setxOrc(chat.getX());
-						golem.setyOrc(chat.getY());
+						game.golem.setOrcKick(chat.isKick());
+						game.golem.setxOrc(chat.getX());
+						game.golem.setyOrc(chat.getY());
 
 						System.out.println(chat.getMe());
 
 					}
 					else if (chat.getMe().equals("ice")) {
-						golem.setIceKick(chat.isKick());
-						golem.setxIce(chat.getX());
-						golem.setyIce(chat.getY());
+						game.golem.setIceKick(chat.isKick());
+						game.golem.setxIce(chat.getX());
+						game.golem.setyIce(chat.getY());
 
 						System.out.println(chat.getMe());
 
 					}
 					else if (chat.getMe().equals("lava")) {
-						golem.setLavaKick(chat.isKick());
-						golem.setxLava(chat.getX());
-						golem.setyLava(chat.getY());
+						game.golem.setLavaKick(chat.isKick());
+						game.golem.setxLava(chat.getX());
+						game.golem.setyLava(chat.getY());
 
 						System.out.println(chat.getMe());
 
 					}
 					else if (chat.getMe().equals("angel")) {
-						golem.setAngelKick(chat.isKick());
-						golem.setxAngel(chat.getX());
-						golem.setyAngle(chat.getY());
+						game.golem.setAngelKick(chat.isKick());
+						game.golem.setxAngel(chat.getX());
+						game.golem.setyAngle(chat.getY());
 
 					}
 					

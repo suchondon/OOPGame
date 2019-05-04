@@ -9,7 +9,7 @@ import java.util.Enumeration;
 class ClientFind {{
 	DatagramSocket c;
 	String ip = "";
-	network n1 = new network();
+	network network = new network();
 	try {
 		  //Open a random port to send the package
 		  c = new DatagramSocket();
@@ -61,11 +61,16 @@ class ClientFind {{
 		  //We have a response
 		  
 		  System.out.println( ">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
-		  n1.setServerIP(receivePacket.getAddress().getHostAddress());
+		  network.setServerIP(receivePacket.getAddress().getHostAddress());
 
 		  c.close();
 		} catch (IOException ex) {
 		  //Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
 		}
+}
+
+private void ClientFind(network network) {
+	// TODO Auto-generated method stub
+	
 }
 }
