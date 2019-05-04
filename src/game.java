@@ -22,7 +22,11 @@ public class game extends JFrame implements KeyListener{
 	network network;
 	Golem golem = new Golem();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	server s1 = new server(golem);
+=======
+	server s1 = new server(golem,network);
+>>>>>>> parent of 81944e7... Add FindIP
 =======
 	server s1 = new server(golem,network);
 >>>>>>> parent of 81944e7... Add FindIP
@@ -36,6 +40,11 @@ public class game extends JFrame implements KeyListener{
 		setLocationRelativeTo(null);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		this.network = network;
+		
+>>>>>>> parent of 81944e7... Add FindIP
 =======
 		this.network = network;
 		

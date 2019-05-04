@@ -48,6 +48,10 @@ public class network extends JFrame{
 		panel1.add(server);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		rungame.start();
+>>>>>>> parent of 81944e7... Add FindIP
 =======
 		rungame.start();
 >>>>>>> parent of 81944e7... Add FindIP
@@ -138,11 +142,14 @@ public class network extends JFrame{
 class server extends Thread{
 	Golem golem;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ServerSocket servSocket;
 	
 	public server(Golem golem){
 		this.golem = golem;
 =======
+=======
+>>>>>>> parent of 81944e7... Add FindIP
 	network network;
 	ServerSocket servSocket;
 	
@@ -175,7 +182,10 @@ class server extends Thread{
 						golem.setxOrc(chat.getX());
 						golem.setyOrc(chat.getY());
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 81944e7... Add FindIP
 						System.out.println(chat.getMe());
 >>>>>>> parent of 81944e7... Add FindIP
 					}
@@ -184,7 +194,10 @@ class server extends Thread{
 						golem.setxIce(chat.getX());
 						golem.setyIce(chat.getY());
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 81944e7... Add FindIP
 						System.out.println(chat.getMe());
 >>>>>>> parent of 81944e7... Add FindIP
 					}
@@ -193,7 +206,10 @@ class server extends Thread{
 						golem.setxLava(chat.getX());
 						golem.setyLava(chat.getY());
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 81944e7... Add FindIP
 						System.out.println(chat.getMe());
 >>>>>>> parent of 81944e7... Add FindIP
 					}
@@ -202,10 +218,13 @@ class server extends Thread{
 						golem.setxAngel(chat.getX());
 						golem.setyAngle(chat.getY());
 <<<<<<< HEAD
+<<<<<<< HEAD
 					}
 					
 					System.out.println(chat.getMe());
 =======
+=======
+>>>>>>> parent of 81944e7... Add FindIP
 						System.out.println(chat.getMe());
 					}
 					
@@ -213,6 +232,9 @@ class server extends Thread{
 //					network.send(network.getClientIP(1));
 //					network.send(network.getClientIP(2));
 					
+<<<<<<< HEAD
+>>>>>>> parent of 81944e7... Add FindIP
+=======
 >>>>>>> parent of 81944e7... Add FindIP
 					System.out.println(chat.getX());
 					System.out.println(chat.getY());

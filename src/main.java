@@ -26,5 +26,8 @@ class rungame extends Thread{
 		network.playgame.setVisible(true);
 		
 	}
+<<<<<<< HEAD
+>>>>>>> parent of 81944e7... Add FindIP
+=======
 >>>>>>> parent of 81944e7... Add FindIP
 }
