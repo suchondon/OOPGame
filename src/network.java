@@ -27,8 +27,6 @@ import javax.swing.JTextArea;
 public class network extends JFrame{
 	BroadcastServer serverBroad = new BroadcastServer(this);
 	ClientFind findServer;
-	game playgame = new game(this);
-	rungame rungame = new rungame(this);
 	JPanel panel1 = new JPanel(new GridLayout(3, 1));
 	JButton join = new JButton("Join");
 	JButton server = new JButton("Server");
@@ -47,7 +45,6 @@ public class network extends JFrame{
 		panel1.add(join);
 		panel1.add(server);
 		
-		rungame.start();
 		
 		add(panel1);
 		

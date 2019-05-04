@@ -19,19 +19,17 @@ import javax.swing.JPanel;
 
 
 public class game extends JFrame implements KeyListener{
-	network network;
+	network network = new network();
 	Golem golem = new Golem();
 	server s1 = new server(golem,network);
 	int xIce=0,xLava=0,xOrc=1180,xAngel=1180;
 	int yIce=300,yLava=500,yOrc=300,yAngle=500;
 	String myGolem;
-	public game(network network) {
+	public game() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Fighter spirit");
 		setSize(1320,729);
 		setLocationRelativeTo(null);
-		
-		this.network = network;
 		
 		addKeyListener(this);
 		s1.start();
@@ -45,7 +43,7 @@ public class game extends JFrame implements KeyListener{
 		golem.setyOrc(yOrc);
 		golem.setyAngle(yAngle);
 		
-		
+		network.setVisible(true);
 		
 		add(golem);
 		
